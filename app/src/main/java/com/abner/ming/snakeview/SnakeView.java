@@ -203,9 +203,12 @@ public class SnakeView extends View{
      * 开始
      * */
     public void startSnake(){
-        isLoding=false;
-        mPaintText.setColor(Color.TRANSPARENT);
-        mPaintLoding.setColor(Color.TRANSPARENT);
+         if(isLoding){
+            intX=intXS=mWidth/50;
+            intY=intYS=mHeight/50;
+            isLoding=false;
+            clickKey=4;
+        }
         mHandler.removeMessages(SNAKE);
         mHandler.sendEmptyMessage(SNAKE);
     }
@@ -266,6 +269,8 @@ public class SnakeView extends View{
             super.handleMessage(msg);
             switch (msg.what){
                 case SNAKE:
+                      mPaintText.setColor(Color.TRANSPARENT);
+                      mPaintLoding.setColor(Color.TRANSPARENT);
                     createSnakeRect();
                     if(clickKey==1){
                         if(rectRandom.top==rectSnake.top&&rectRandom.left==rectSnake.left){
